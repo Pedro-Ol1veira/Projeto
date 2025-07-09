@@ -10,6 +10,7 @@ import { IFiltro } from "@/Interfaces/IFiltro";
 import { INewMateria } from "@/Interfaces/INewMateria";
 import { INewTask } from "@/Interfaces/INewTask";
 import { IUpdateAluno } from "@/Interfaces/IUpdateAluno";
+import { IUpdateMateria } from "@/Interfaces/IUpdateMateria";
 import { IUpdateTask } from "@/Interfaces/IUpdateTask";
 import { Request, Response } from "express";
 
@@ -239,6 +240,32 @@ export class Controller {
         } catch (err: any) {
             if(!err.status) {
                 console.log(err);
+                res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
+                return;
+            }
+            res.status(err.status).json({error: err.message}); 
+        }
+    }
+
+    public async updateMateria(req: Request, res: Response): Promise<void> {
+        const codigo: string = req.params.codigo;
+        const data: IUpdateMateria = req.body;
+        try {
+            if(data.codigo) {
+                db.aluno.getMateria(codigo).setCodigo(data.codigo);
+                res.status(200).json(db.aluno.getMateria(data.codigo));
+                return;
+            }
+            
+            if(data.nome) {
+                db.aluno.getMateria(codigo).setNome(data.nome);
+                res.status(200).json(db.aluno.getMateria(codigo));
+                return;
+            }
+
+    
+        } catch (err: any) {
+            if(!err.status) {
                 res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
                 return;
             }

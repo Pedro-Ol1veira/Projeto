@@ -30,6 +30,18 @@ export class Materia {
         this.tasks = [];
     }
 
+    public setCodigo(newCodigo: string) {
+        if(!Regex.isValidCodigoMateria(newCodigo)) {
+            throw new UnprocessableError("O codigo da materia deve esta no formato: AAAA99");
+        }
+
+        this.codigo = newCodigo.toUpperCase();
+    }
+
+    public setNome(newNome: string) {
+        this.nome = newNome;
+    }
+
     public getCodigo(): string {
         return this.codigo;
     }
