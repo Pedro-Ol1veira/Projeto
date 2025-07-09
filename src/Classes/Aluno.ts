@@ -33,6 +33,30 @@ export class Aluno {
         this.materias = [];
     }
 
+    public setMatricula(newMatricula: string) {
+        if(!newMatricula) {
+            throw new UnprocessableError("A matricula é obrigatória");
+        }
+
+        if(!Regex.isValidMatricula(newMatricula)) {
+            throw new UnprocessableError("A matricula deve conter exatamente 9 digitos e todos devem ser numeros de 0-9");
+        }
+
+        this.matricula = newMatricula;
+    }
+
+    public setSemIng(newSemIng: string) {
+        if(!Regex.isValidAnoSemestre(newSemIng)) {
+            throw new UnprocessableError("O ano de ingresso precisa ser valido. Ex: 2024-1");
+        }
+
+        this.semIng = newSemIng;
+    }
+
+    public setCurso(newCurso: string) {
+        this.curso = newCurso;
+    }
+
     public getMaterias(): Materia[] {
         return this.materias;
     }

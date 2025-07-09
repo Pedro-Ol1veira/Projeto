@@ -6,6 +6,7 @@ const Routes = Router();
 const controller = new Controller();
 
 Routes.post("/", controller.create);
+Routes.put("/", checkAluno, controller.updateAluno);
 Routes.post("/materias", checkAluno, controller.cadastrarMateria);
 Routes.post("/tasks/:codigoMateria", checkAluno, controller.cadastrarTask);
 Routes.get("/materias", checkAluno, controller.getMaterias);

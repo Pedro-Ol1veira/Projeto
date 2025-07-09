@@ -9,6 +9,7 @@ import { ICreateAluno } from "@/Interfaces/ICreateAluno";
 import { IFiltro } from "@/Interfaces/IFiltro";
 import { INewMateria } from "@/Interfaces/INewMateria";
 import { INewTask } from "@/Interfaces/INewTask";
+import { IUpdateAluno } from "@/Interfaces/IUpdateAluno";
 import { IUpdateTask } from "@/Interfaces/IUpdateTask";
 import { Request, Response } from "express";
 
@@ -181,12 +182,35 @@ export class Controller {
             res.status(200).json(task);
         } catch (err: any) {
             if(!err.status) {
-                console.log(err);
                 res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
                 return;
             }
             res.status(err.status).json({error: err.message}); 
         }
         
+    }
+
+    public async updateAluno(req: Request, res: Response) {
+        const data: IUpdateAluno = req.body;
+
+        try {
+            if(data.curso) {
+                db.aluno.setCurso(data.curso);
+            }
+            if(data.matricula) {
+                db.aluno.setMatricula(data.matricula);
+            }
+            if(data.semIng) {
+                db.aluno.setSemIng(data.semIng);
+            }
+            res.status(200).json(db.aluno);
+        } catch (err: any) {
+            if(!err.status) {
+                res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
+                return;
+            }
+            res.status(err.status).json({error: err.message}); 
+        }
+
     }
 }
