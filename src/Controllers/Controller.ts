@@ -213,4 +213,20 @@ export class Controller {
         }
 
     }
+
+    public async deleteMateria(req: Request, res: Response) {
+        const codigo: string = req.params.codigo.toUpperCase();
+
+        try {
+            db.aluno.deleteMateria(codigo);
+            res.status(200).json(db.aluno.getMaterias());
+        } catch (err: any) {
+            if(!err.status) {
+                console.log(err);
+                res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
+                return;
+            }
+            res.status(err.status).json({error: err.message}); 
+        }
+    }
 }

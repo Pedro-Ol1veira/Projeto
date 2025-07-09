@@ -70,6 +70,14 @@ export class Aluno {
         return findMateria;
     }
 
+    public deleteMateria(codigo: string): void {
+        const findMateria = this.materias.find((materia: Materia) => materia.getCodigo() == codigo);
+        if(!findMateria) {
+            throw new NotFoundError("Materia não encontrada");
+        }
+        this.materias = this.materias.filter((materia: Materia) => materia.getCodigo() != codigo);
+    }
+    
     public cadastrarMateria(newMateria: Materia): void {
         this.materias.map((materia: Materia) => {
             if(materia.getCodigo() == newMateria.getCodigo()) {
