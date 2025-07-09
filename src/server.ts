@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.use(Routes);
 
-const port = 3000;
+const port = 4000;
 
 app.listen(port, () => {
     console.log(`Server rodando na porta ${port}`);
