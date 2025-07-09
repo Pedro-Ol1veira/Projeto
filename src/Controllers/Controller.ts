@@ -153,6 +153,22 @@ export class Controller {
         }
     }
 
+    public async deleteTask(req: Request, res: Response): Promise<void> { 
+        const codigo = req.params.codigo.toUpperCase();
+        const id = req.params.id;
+
+        try {
+            db.aluno.getMateria(codigo).deleteTask(id);
+            res.status(200).json(db.aluno.getMateria(codigo).getTasks());
+        } catch (err: any) {
+            if(!err.status) {
+                res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
+                return;
+            }
+            res.status(err.status).json({error: err.message});   
+        }
+    }
+
     public async uptadeTask(req: Request, res: Response): Promise<void> {
         const id = req.params.id;
         const codigoMateria = req.params.codigo.toUpperCase();
@@ -190,7 +206,7 @@ export class Controller {
         
     }
 
-    public async updateAluno(req: Request, res: Response) {
+    public async updateAluno(req: Request, res: Response): Promise<void> {
         const data: IUpdateAluno = req.body;
 
         try {
@@ -214,7 +230,7 @@ export class Controller {
 
     }
 
-    public async deleteMateria(req: Request, res: Response) {
+    public async deleteMateria(req: Request, res: Response): Promise<void> {
         const codigo: string = req.params.codigo.toUpperCase();
 
         try {

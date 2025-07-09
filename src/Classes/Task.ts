@@ -3,10 +3,10 @@ import { randomUUID, UUID } from "crypto";
 import {parse, isValid, isBefore} from 'date-fns';
 
 export class Task {
-    id: UUID = randomUUID()
-    dataPassada: Date;
-    dataDeEntrega: Date;
-    completa: boolean;
+    private id: UUID = randomUUID()
+    private dataPassada: Date;
+    private dataDeEntrega: Date;
+    private completa: boolean;
     constructor(dataPassada: string, dataDeEntrega: string) {
         
         const formatDataPassada = parse(dataPassada, 'dd/MM/yyyy', new Date());
@@ -22,6 +22,10 @@ export class Task {
         this.dataPassada = formatDataPassada;
         this.dataDeEntrega = formatDataDeEntrega;
         this.completa = false;
+    }
+
+    public getId(): string {
+        return this.id;
     }
 
     public completarTask(): void {

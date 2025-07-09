@@ -13,6 +13,7 @@ Routes.get("/materias", checkAluno, controller.getMaterias);
 Routes.delete("/materias/:codigo", checkAluno, controller.deleteMateria);
 Routes.get("/materias/:codigo/tasks", checkAluno, controller.getTasks);
 Routes.patch("/materias/:codigo/tasks/:id", checkAluno, controller.concluirTask);
+Routes.delete("/materias/:codigo/tasks/:id", checkAluno, controller.deleteTask);
 Routes.get("/materias/:codigo/tasks/:id", checkAluno, controller.getTask);
 Routes.put("/materias/:codigo/tasks/:id", checkAluno, controller.uptadeTask);
 

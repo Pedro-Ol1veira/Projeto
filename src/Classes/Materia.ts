@@ -46,19 +46,28 @@ export class Materia {
         }
 
         if(filtro?.status == 'completas') {
-            searchTasks = this.tasks.filter((task: Task) => task.completa == true);
+            searchTasks = this.tasks.filter((task: Task) => task.getStatus() == true);
         } else if (filtro?.status == 'incompletas') {
-            searchTasks = this.tasks.filter((task: Task) => task.completa == false);
+            searchTasks = this.tasks.filter((task: Task) => task.getStatus() == false);
         }
         return searchTasks;
     }
 
     public getTask(id: string): Task {
-        const checkTask = this.tasks.find((task: Task) => task.id == id);
+        const checkTask = this.tasks.find((task: Task) => task.getId() == id);
         if(!checkTask) {
             throw new NotFoundError("Tarefa não encontrada");
         }
         return checkTask;
+    }
+
+    public deleteTask(id: string): Task[] {
+        const checkTask = this.tasks.find((task: Task) => task.getId() == id);
+        if(!checkTask) {
+            throw new NotFoundError("Tarefa não encontrada");
+        }
+        this.tasks = this.tasks.filter((task: Task) => task.getId() != id);
+        return this.tasks;
     }
 
     public calculaMedia(): void {
