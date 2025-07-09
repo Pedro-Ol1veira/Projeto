@@ -32,6 +32,10 @@ export class Task {
     }
 
     public updateDatas(newDataPassada: string, newDataDeEntrega: string): void {
+        if(!newDataDeEntrega || !newDataPassada) {
+            throw new UnprocessableError("A data passada e a data de entrega são obrigatória");
+        }
+        
         const formatDataPassada = parse(newDataPassada, 'dd/MM/yyyy', new Date());
         const formatDataDeEntrega = parse(newDataDeEntrega, 'dd/MM/yyyy', new Date());
 

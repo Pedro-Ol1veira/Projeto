@@ -168,14 +168,20 @@ export class Controller {
                 task.setValor(data.valor)
             }
 
-            if(task instanceof Projeto && data.valor && data.descricao) {
-                task.setDescricao(data.descricao);
+            if(task instanceof Projeto) {
+                if(data.valor) {
+                    task.setValor(data.valor);
+                }
+                if(data.descricao) {
+                    task.setDescricao(data.descricao);
+                }
             }
 
             task.updateDatas(data.dataPassada, data.dataDeEntrega);
             res.status(200).json(task);
         } catch (err: any) {
             if(!err.status) {
+                console.log(err);
                 res.status(500).json({error: "Ocorreu um erro no servidor tente novamente mais tarde"});
                 return;
             }
