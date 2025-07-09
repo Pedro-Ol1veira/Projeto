@@ -118,13 +118,15 @@ export class Controller {
         try {
             const task = db.aluno.getMateria(codigoMateria).getTask(id);
 
-            if((task instanceof Prova || task instanceof Projeto) && nota) {
+            if((task instanceof Prova || task instanceof Projeto)) {
                 task.lancarNota(nota);
+                task.completarTask();
+            } else {
+                task.completarTask();
             }
 
             db.aluno.getMateria(codigoMateria).calculaMedia();
             
-            db.aluno.getMateria(codigoMateria).getTask(id)?.completarTask();
             res.status(200).json(db.aluno.getMateria(codigoMateria).getTask(id));
         } catch (err: any) {
            if(!err.status) {
