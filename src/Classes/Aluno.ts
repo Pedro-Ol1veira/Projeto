@@ -33,7 +33,7 @@ export class Aluno {
         this.materias = [];
     }
 
-    public setMatricula(newMatricula: string) {
+    public setMatricula(newMatricula: string): void {
         if(!newMatricula) {
             throw new UnprocessableError("A matricula é obrigatória");
         }
@@ -45,7 +45,7 @@ export class Aluno {
         this.matricula = newMatricula;
     }
 
-    public setSemIng(newSemIng: string) {
+    public setSemIng(newSemIng: string): void {
         if(!Regex.isValidAnoSemestre(newSemIng)) {
             throw new UnprocessableError("O ano de ingresso precisa ser valido. Ex: 2024-1");
         }
@@ -53,7 +53,7 @@ export class Aluno {
         this.semIng = newSemIng;
     }
 
-    public setCurso(newCurso: string) {
+    public setCurso(newCurso: string): void {
         this.curso = newCurso;
     }
 
