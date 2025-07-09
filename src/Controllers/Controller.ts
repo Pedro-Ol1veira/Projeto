@@ -46,7 +46,7 @@ export class Controller {
     }
 
     public async cadastrarTask(req: Request, res: Response): Promise<void> {
-        const codigoMateria = req.params.codigoMateria.toUpperCase();
+        const codigoMateria = req.params.codigoMateria;
         const data: INewTask = req.body;
 
         try {
@@ -86,7 +86,7 @@ export class Controller {
     }
 
     public async getTasks(req: Request, res: Response): Promise<void> {
-        const codigoMateria = req.params.codigo.toUpperCase();
+        const codigoMateria = req.params.codigo;
 
         const status = req.query.status;
 
@@ -114,7 +114,7 @@ export class Controller {
 
     public async concluirTask(req: Request, res: Response): Promise<void> {
         const id = req.params.id;
-        const codigoMateria = req.params.codigo.toUpperCase();
+        const codigoMateria = req.params.codigo;
         const nota = req.body.nota;
         try {
             const task = db.aluno.getMateria(codigoMateria).getTask(id);
@@ -141,7 +141,7 @@ export class Controller {
 
     public async getTask(req: Request, res: Response): Promise<void> {
         const id = req.params.id;
-        const codigoMateria = req.params.codigo.toUpperCase();
+        const codigoMateria = req.params.codigo;
         try {
             res.status(200).json(db.aluno.getMateria(codigoMateria).getTask(id));
         } catch (err: any) {
@@ -154,7 +154,7 @@ export class Controller {
     }
 
     public async deleteTask(req: Request, res: Response): Promise<void> { 
-        const codigo = req.params.codigo.toUpperCase();
+        const codigo = req.params.codigo;
         const id = req.params.id;
 
         try {
@@ -171,7 +171,7 @@ export class Controller {
 
     public async uptadeTask(req: Request, res: Response): Promise<void> {
         const id = req.params.id;
-        const codigoMateria = req.params.codigo.toUpperCase();
+        const codigoMateria = req.params.codigo;
 
         const data: IUpdateTask = req.body;
 
@@ -231,7 +231,7 @@ export class Controller {
     }
 
     public async deleteMateria(req: Request, res: Response): Promise<void> {
-        const codigo: string = req.params.codigo.toUpperCase();
+        const codigo: string = req.params.codigo;
 
         try {
             db.aluno.deleteMateria(codigo);

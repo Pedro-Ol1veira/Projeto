@@ -62,6 +62,7 @@ export class Aluno {
     }
 
     public getMateria(codigo: string): Materia {
+        codigo = codigo.toUpperCase();
         const findMateria = this.materias.find((materia: Materia) => materia.getCodigo() == codigo);
         if(!findMateria) {
             throw new NotFoundError("Materia não encontrada");
@@ -71,6 +72,7 @@ export class Aluno {
     }
 
     public deleteMateria(codigo: string): void {
+        codigo = codigo.toUpperCase();
         const findMateria = this.materias.find((materia: Materia) => materia.getCodigo() == codigo);
         if(!findMateria) {
             throw new NotFoundError("Materia não encontrada");
@@ -89,6 +91,7 @@ export class Aluno {
     }
 
     public cadastrarTask(newTask: Task, codigo: string): void {
+        codigo = codigo.toUpperCase();
         const checkMateria = this.materias.find((materia: Materia) => materia.getCodigo() == codigo);
         if(checkMateria) {
             checkMateria.cadastrarTask(newTask);
